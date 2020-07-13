@@ -101,3 +101,38 @@ member_pivot
 #performing another chi squared test
 contingency = [[200, 50], [250, 75]]
 chi2_contingency(contingency)
+#this is the output of the test: (5.9491822925911562, 0.014724114645783203, 1, array([[  225.17985612,  2278.82014388], [  224.82014388,  2275.17985612]]))
+
+#creating bar graph to show percent of visitors who applied
+ax = plt.subplot()
+plt.bar(range(len(app_pivot)),
+       app_pivot['Percent with Application'].values)
+ax.set_xticks(range(len(app_pivot)))
+ax.set_xticklabels(['Participated In Fitness Test', 'Did Not Participate In
+                    Fitness Test'])
+ax.set_yticks([0, 0.05, 0.10, 0.15, 0.20])
+ax.set_yticklabels(['0%', '5%', '10%', '15%', '20%'])
+plt.show()
+plt.savefig('percent_visitors_apply.png')
+
+#creating bar graph to show percent of applicants who purchased a membership
+ax = plt.subplot()
+plt.bar(range(len(member_pivot)),
+       member_pivot['Percent Purchase'].values)
+ax.set_xticks(range(len(app_pivot)))
+ax.set_xticklabels(['Participated In Fitness Test', 'Did Not Participate Fitness Test'])
+ax.set_yticks([0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1])
+ax.set_yticklabels(['0%', '10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '100%'])
+plt.show()
+plt.savefig('percent_apply_purchase.png')
+                    
+#creating bar graph to show percent of visitors who purchased a membership
+                    ax = plt.subplot()
+plt.bar(range(len(final_member_pivot)),
+       final_member_pivot['Percent Purchase'].values)
+ax.set_xticks(range(len(app_pivot)))
+ax.set_xticklabels(['Fitness Test', 'No Fitness Test'])
+ax.set_yticks([0, 0.05, 0.10, 0.15, 0.20])
+ax.set_yticklabels(['0%', '5%', '10%', '15%', '20%'])
+plt.show()
+plt.savefig('percent_visitors_purchase.png')
