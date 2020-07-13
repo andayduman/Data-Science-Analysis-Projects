@@ -58,12 +58,12 @@ category_pivot.head(10)
 contingency = [[30, 146], [75, 413]]
 chi2_contingency(contingency)
 #creating table to run chi squared test on mammal and bird species categories to determine if mammals are more likely to be endangered than birds
-#results showed that there isn't a significant difference betweeen the threat level of mammals and birds 
+#results showed that there isn't a significant difference betweeen the threat level of mammals and birds as p-value = 0.6875948096661336
               
-contingency2 = [[5, 73], [30, 146]]
+contingency2 = [[75, 413], [30, 146]]
 chi2_contingency(contingency2)
-#creating table to run chi squared test on mammal and reptile species categories to determine if mammals are more likely to be endangered than birds
-#results showed that there is a significant difference between endagered threat level of mammals and reptiles
+#creating table to run chi squared test on bird and amphibian species categories to determine if birds are more likely to be endangered than amphibians
+#results showed that there isn't significant difference between endagered threat level of birds and amphibians as p-value = 0.175936132496 
 
 
 observations = pd.read_csv('observations.csv')
