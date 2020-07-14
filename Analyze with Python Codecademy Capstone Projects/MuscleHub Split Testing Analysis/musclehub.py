@@ -106,6 +106,11 @@ contingency = [[200, 50], [250, 75]]
 chi2, pval, dof, expected = chi2_contingency(contingency)
 #the resulting p-value = 0.432586460511. Since p-value > 0.05, we cannot reject the null hypothesis thus there is no significant difference as to why people in Group B had submitted more applications than people in Group A.
 
+#Comparing significance of ALL people from groups A and B that got a membership, not just those that picked up an application
+contingency3 = [[200, 2304], [250, 2250]]
+chi2, pval, dof, expected = chi2_contingency(contingency3)
+#calculated p-value was < 0.05, thus it is significant
+
 #creating bar graph to show percent of visitors who applied
 ax = plt.subplot()
 plt.bar(range(len(app_pivot)),
