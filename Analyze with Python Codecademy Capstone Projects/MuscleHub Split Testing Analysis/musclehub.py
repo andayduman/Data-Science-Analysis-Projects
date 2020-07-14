@@ -19,7 +19,7 @@ sql_query('''SELECT * FROM fitness_tests LIMIT 5''')
 sql_query('''SELECT * FROM applications LIMIT 5''')
 sql_query('''SELECT * FROM purchases LIMIT 5''')
 
-#creating large dataframe 'df' to combine all the data together using LEFT JOIN
+#creating large dataframe 'df' to combine all the data tables together using LEFT JOIN
 df = sql_query('''
 SELECT visits.first_name,
        visits.last_name,
@@ -43,7 +43,7 @@ LEFT JOIN purchases
 WHERE visits.visit_date >= '7-1-17'
 ''')
 
-#STEP 3: Investigate the A and B groups
+#STEP 3: Investigate the A (fitness test) and B (no fitness test) groups
 #adding new column to df dataframe called 'ab_test_group'
 df['ab_test_group'] = df.fitness_test_date.apply(lambda x: 'A' if pd.notnull(x) else 'B') 
 
@@ -51,7 +51,7 @@ df['ab_test_group'] = df.fitness_test_date.apply(lambda x: 'A' if pd.notnull(x) 
 ab_counts = df.groupby('ab_test_group').first_name.count().reset_index()
 ab_counts
 
-#building pie cart of ab_counts information
+#building pie cart of ab_counts information to show the percentage of people in test group A (who were given a fitness test) and group B (who were not given a fitness test),
 plt.pie(ab_counts.first_name.values, labels=['A', 'B'], autopct='%0.2f%%')
 plt.axis('equal')
 plt.title('Pie Chart of ab_counts')
