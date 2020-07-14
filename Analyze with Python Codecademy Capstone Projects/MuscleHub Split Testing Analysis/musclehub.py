@@ -1,7 +1,8 @@
-import pandas as pd
-from matplotlib import pyplot as plt
-from scipy.stats import chi2_contingency
-from codecademySQL import sql_query
+#STEP 1: Getting started with SQL
+import pandas as pd #import pandas
+from matplotlib import pyplot as plt #import matplotlib
+from scipy.stats import chi2_contingency #import chi squared test
+from codecademySQL import sql_query #import library to use sql query commands
 #this import allows for using SQL commands within a Python 3 file on Jupyter Notebook
 
 #sample query using sql_query from codecademySQL library
@@ -11,7 +12,8 @@ FROM visits
 LIMIT 5
 ''')
 
-#examining each table
+#STEP 2: Getting the dataset
+#examining each table given
 sql_query('''SELECT * FROM visits LIMIT 10''')
 sql_query('''SELECT * FROM fitness_tests LIMIT 5''')
 sql_query('''SELECT * FROM applications LIMIT 5''')
@@ -41,6 +43,7 @@ LEFT JOIN purchases
 WHERE visits.visit_date >= '7-1-17'
 ''')
 
+#STEP 3: Investigate the A and B groups
 #adding new column to df dataframe called 'ab_test_group'
 df['ab_test_group'] = df.fitness_test_date.apply(lambda x: 'A' if pd.notnull(x) else 'B') 
 
@@ -55,7 +58,7 @@ plt.title('Pie Chart of ab_counts')
 plt.savefig('ab_test_pie_chart.png')
 plt.show()
 
-#STEP 4: Who pick's up an application?
+#STEP 4: Determining who pick's up an application?
 #new column in df called 'is_application' where if application_date column entry is not null, then is_application column value for entry is 'Application' else 'No Application'
 df['is_application'] = df.application_date.apply(lambda x: 'Application' if pd.notnull(x) else 'No Application')
 
@@ -78,7 +81,7 @@ contingency = [[250, 2254], [325, 2175]]
 chi2_contingency(contingency)
 #this is the output: (10.893961295282612, 0.0009647827600722304, 1,array([[ 287.72981615, 2216.27018385], [ 287.27018385, 2212.72981615]]))
 
-#STEP 5: Who purchases a membership?
+#STEP 5: Determining who purchases a membership?
 #of those who picked up an application, how many purchased a membership?
 
 #creating new column in df called 'is_member' to identify which participants have a registered membership purchase_date
@@ -100,8 +103,8 @@ member_pivot
 
 #performing another chi squared test
 contingency = [[200, 50], [250, 75]]
-chi2_contingency(contingency)
-#this is the output of the test: (5.9491822925911562, 0.014724114645783203, 1, array([[  225.17985612,  2278.82014388], [  224.82014388,  2275.17985612]]))
+chi2, pval, dof, expected = chi2_contingency(contingency)
+#the resulting p-value = 0.432586460511. Since p-value > 0.05, we cannot reject the null hypothesis thus there is no significant difference as to why people in Group B had submitted more applications than people in Group A.
 
 #creating bar graph to show percent of visitors who applied
 ax = plt.subplot()
