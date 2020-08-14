@@ -69,6 +69,6 @@ select Reporting_Date, Total_Number_of_Pending_Tests_on_Reporting_Date from covi
  select Reporting_Date, Total_Number_of_Pending_Tests_on_Reporting_Date from covidinmatetesting where Region = 'Toronto'
  /*difference in number of cases was 983, number of new positive cases is 11, number of negative cases is 778, total number of pending tests on latest date is 198 cases*/
 
- /*Loading up table into COVID-19 database titled 'Status of COVID-19 cases in Ontario’s Provincial Correctional Institutions */
+ /*Loading up table into COVID-19 database titled 'Status of COVID-19 cases in Ontarioâ€™s Provincial Correctional Institutions */
 
 
